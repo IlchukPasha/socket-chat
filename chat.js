@@ -9,13 +9,14 @@ const expressServer = app.listen(9000);
 const io = socketio(expressServer);
 
 io.on('connection', socket => {
-  socket.emit('messageFromServer', { data: 'Welcome!' });
+  console.log('connected');
+  // socket.emit('messageFromServer', { data: 'Welcome!' });
 
-  socket.on('messageToServer', dataFromClient => {
-    console.log(dataFromClient);
-  });
+  // socket.on('messageToServer', dataFromClient => {
+  //   console.log(dataFromClient);
+  // });
 
-  socket.on('newMessageToServer', message => {
-    io.emit('messageToClients', { text: message.text });
-  });
+  // socket.on('newMessageToServer', message => {
+  //   io.emit('messageToClients', { text: message.text });
+  // });
 });
