@@ -1,7 +1,13 @@
-const socket = io('http://localhost:9000');
-const socket1 = io('http://localhost:9000/wiki');
-const socket2 = io('http://localhost:9000/mozilla');
-const socket3 = io('http://localhost:9000/linux');
+const username = prompt("What is your username?");
+
+// const socket = io('http://localhost:9000');
+const socket = io('http://localhost:9000',{
+    query: {
+        username
+    }
+});
+
+let nsSocket = "";
 
 // socket.on('connect', () => {
 //   console.log('socker id: ', socket.id)
@@ -17,11 +23,11 @@ socket.on('nsList', nsData => {
   Array.from(document.getElementsByClassName('namespace')).forEach(elem => {
     const nsEndpoint = elem.getAttribute('ns');
     elem.addEventListener('click', e => {
-
+      joinNs(nsEndpoint);
     });
   });
 
-  joinNs('/wiki');
+  joinNs(nsData[0].endpoint);
 });
 
 // socket.on('ping', () => {
